@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eine wichtige Nachricht</title>
+  <meta name="description" content="Eine persönliche Nachricht">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #fff5f0 0%, #ffe8dc 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      color: #2d2d2d;
+    }
+
+    .container {
+      max-width: 42rem;
+      width: 100%;
+    }
+
+    .card {
+      background: #fffbf7;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 40px rgba(255, 107, 107, 0.1);
+      padding: 3rem;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        padding: 2rem;
+      }
+    }
+
+    .heart-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .heart {
+      width: 4rem;
+      height: 4rem;
+      color: #ff6b6b;
+      animation: pulse 2s infinite;
+    }
+
+    .content {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.875rem;
+      }
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      animation: fadeIn 1s ease-out 0.2s both;
+    }
+
+    .message p {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: rgba(45, 45, 45, 0.9);
+    }
+
+    @media (max-width: 768px) {
+      .message p {
+        font-size: 1.125rem;
+      }
+    }
+
+    .highlight {
+      color: #ff6b6b;
+      font-weight: 600;
+      padding-top: 1rem;
+    }
+
+    .button-container {
+      padding-top: 2rem;
+    }
+
+    .button {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 40px rgba(255, 107, 107, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 50px rgba(255, 107, 107, 0.3);
+    }
+
+    .signature {
+      padding-top: 2rem;
+      color: #8d8d8d;
+      font-style: italic;
+    }
+
+    .signature p {
+      margin-top: 0.5rem;
+    }
+
+    .hearts-decoration {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      opacity: 0.4;
+    }
+
+    .small-heart {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: #ff6b6b;
+    }
+
+    .tiny-heart {
+      width: 1rem;
+      height: 1rem;
+      color: #ff6b6b;
+      margin-top: 0.5rem;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      animation: slideUp 0.4s ease-out;
+      max-width: 90%;
+    }
+
+    .modal-content h2 {
+      font-size: 2rem;
+      color: #ff6b6b;
+      margin-bottom: 1rem;
+    }
+
+    .close-button {
+      margin-top: 1rem;
+      padding: 0.75rem 2rem;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .close-button:hover {
+      background: #ff5252;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <!-- Heart Icon -->
+      <div class="heart-container">
+        <svg class="heart" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
+
+      <!-- Main Message -->
+      <div class="content">
+        <h1>Liebe Romy,</h1>
+        
+        <div class="message">
+          <p>
+            Ich hatte viel Zeit zum Nachdenken, und ich möchte dir sagen, dass ich dich immer noch liebe.
+          </p>
+          
+          <p>
+            Es tut mir wirklich leid, wie ich dich behandelt habe. Das war falsch und du hast so viel besser verdient.
+          </p>
+          
+          <p>
+            Ich weiss, dass du mich auch noch liebst. Du hast mir gesagt, dass du an mich denkst, und dieser Gedanke gibt mir Hoffnung.
+          </p>
+          
+          <p class="highlight">
+            Können wir noch einmal von vorne anfangen?
+          </p>
+        </div>
+
+        <!-- Button -->
+        <div class="button-container">
+          <button class="button" onclick="showPopup()">
+            Willst du wieder meine Freundin sein? ❤️
+          </button>
+        </div>
+
+        <!-- Signature -->
+        <div class="signature">
+          <p>In Liebe,</p>
+          <p>Dein Daniel</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Small hearts decoration -->
+    <div class="hearts-decoration">
+      <svg class="small-heart" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      <svg class="tiny-heart" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      <svg class="small-heart" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" onclick="closePopup(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <h2>🎉 YAYYY SEE YOU FRIDAY 🎉</h2>
+      <button class="close-button" onclick="closePopup()">Schließen</button>
+    </div>
+  </div>
+
+  <script>
+    function showPopup() {
+      document.getElementById('modal').classList.add('show');
+    }
+
+    function closePopup(event) {
+      if (!event || event.target === document.getElementById('modal')) {
+        document.getElementById('modal').classList.remove('show');
+      }
+    }
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closePopup();
+      }
+    });
+  </script>
+</body>
+</html>
